@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.coursedesign.TwentyfourActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+        android:id="@+id/leftbrackets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="("/>
+
+        <Button
+            android:id="@+id/rightbrackets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")"/>
+
+        <Button
+            android:id="@+id/addition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"/>
+
+        <Button
+            android:id="@+id/subtraction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"/>
+
+        <Button
+            android:id="@+id/multiply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"/>
+
+        <Button
+            android:id="@+id/division"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请点击图片和运算符号按钮构造自己的24点算式"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/cardOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card1"/>
+
+            <ImageButton
+                android:id="@+id/cardTow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card1"/>
+
+            <ImageButton
+                android:id="@+id/cardThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card1"/>
+
+            <ImageButton
+                android:id="@+id/cardFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="构造您的24点算式"/>
+            <EditText
+                android:id="@+id/result"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+            <Button
+                android:id="@+id/verification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="验证"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统自动生成答案"/>
+            <EditText
+                android:id="@+id/autoresult"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+            <Button
+                android:id="@+id/generateAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生成答案"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
