@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.point)
     Button pointgame;
+    @BindView(R.id.manualpoint)
+    Button manualpointgame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, TwentyfourActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        manualpointgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, ManualTwentyfoutActivity.class);
                 startActivity(intent);
             }
         });

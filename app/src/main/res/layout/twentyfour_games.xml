@@ -9,7 +9,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回上界面"/>
         <Button
         android:id="@+id/leftbrackets"
         android:layout_width="wrap_content"
@@ -51,6 +57,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,12 +66,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="请点击图片和运算符号按钮构造自己的24点算式"/>
+                android:text="请点击图片和运算符号按钮构造自己的24点算式"
+                android:textSize="18dp"/>
+            <Button
+                android:id="@+id/changeCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换牌组"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp">
             <ImageButton
                 android:id="@+id/cardOne"
                 android:layout_width="wrap_content"
@@ -97,14 +112,20 @@
                 android:text="构造您的24点算式"/>
             <EditText
                 android:id="@+id/result"
-                android:layout_width="100dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:enabled="false"/>
             <Button
                 android:id="@+id/verification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="验证"/>
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清空"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -115,14 +136,25 @@
                 android:text="系统自动生成答案"/>
             <EditText
                 android:id="@+id/autoresult"
-                android:layout_width="100dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:enabled="false"/>
             <Button
                 android:id="@+id/generateAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="生成答案"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/version3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="版本3运算结果为:0.8044362360328747"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
