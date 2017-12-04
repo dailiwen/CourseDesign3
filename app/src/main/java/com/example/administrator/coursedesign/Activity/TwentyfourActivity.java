@@ -1,13 +1,9 @@
-package com.example.administrator.coursedesign;
+package com.example.administrator.coursedesign.Activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import com.example.administrator.coursedesign.R;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -87,7 +84,7 @@ public class TwentyfourActivity extends AppCompatActivity {
     //牌是否被选择判断
     boolean[] cardChoose = {false,false,false,false};
 
-@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 隐藏状态栏

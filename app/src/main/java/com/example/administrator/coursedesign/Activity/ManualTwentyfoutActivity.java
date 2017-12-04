@@ -1,4 +1,4 @@
-package com.example.administrator.coursedesign;
+package com.example.administrator.coursedesign.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.administrator.coursedesign.R;
 
 import java.util.LinkedList;
 import java.util.Stack;

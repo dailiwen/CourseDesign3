@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.coursedesign.MainActivity">
+    tools:context="com.example.administrator.coursedesign.Activity.MainActivity">
 
     <Button
         android:id="@+id/point"
@@ -17,6 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="24点游戏（手动）"/>
+
+    <Button
+        android:id="@+id/sixteen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="十六棋子游戏"/>
 
 
 </LinearLayout>
