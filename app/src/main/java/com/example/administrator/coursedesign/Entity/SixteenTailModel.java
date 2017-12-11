@@ -1,4 +1,7 @@
-package com.example.administrator.coursedesign.Tool;
+package com.example.administrator.coursedesign.Entity;
+
+import com.example.administrator.coursedesign.Tool.AbstractGraph;
+import com.example.administrator.coursedesign.Tool.UnweightedGraph;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,7 @@ public class SixteenTailModel {
      * 总共有2的16次方个结点
      */
     public final static int SIZE = (int) Math.pow(2,16);
-    protected AbstractGraph<Integer>.Tree tree;
+    protected AbstractGraph.Tree tree;
 
 
     public SixteenTailModel(boolean isDiag){
@@ -106,7 +109,7 @@ public class SixteenTailModel {
                 node[4*row + column] = 'T';
             }
             else{
-                node[4*row + column] = 'H';
+                node[4* row + column] = 'H';
             }
         }
     }

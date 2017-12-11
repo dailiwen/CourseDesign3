@@ -22,6 +22,9 @@ import java.util.Stack;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author dailiwen
+ */
 public class TwentyfourActivity extends AppCompatActivity {
 
     @BindView(R.id.changeCard)
@@ -105,28 +108,6 @@ public class TwentyfourActivity extends AppCompatActivity {
         cardTow.setImageDrawable(getResources().getDrawable(imgs[number[1]]));
         cardThree.setImageDrawable(getResources().getDrawable(imgs[number[2]]));
         cardFour.setImageDrawable(getResources().getDrawable(imgs[number[3]]));
-
-        long startTime = System.currentTimeMillis();
-        int[] operand = new int[4];
-
-//        for (int a=0; a<13; a++) {
-//            operand[0] = a + 1;
-//            for (int a1=0; a1<13; a1++) {
-//                operand[1] = a1 + 1;
-//                for (int a2=0; a2<13; a2++) {
-//                    operand[2] = a2 + 1;
-//                    for (int a3=0; a3<13; a3++) {
-//                        operand[3] = a3 + 1;
-//                        if (findA(operand)) {
-//                            continue;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        long endTime = System.currentTimeMillis();
-//        Log.d("test", "" + (endTime - startTime));
-//        version3.setText(operand[0] + "");
     }
 
     /**

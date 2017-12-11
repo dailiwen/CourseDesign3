@@ -16,6 +16,9 @@ import java.util.Stack;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author dailiwen
+ */
 public class ManualTwentyfoutActivity extends AppCompatActivity {
 
     @BindView(R.id.numberOne)

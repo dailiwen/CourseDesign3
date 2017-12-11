@@ -4,28 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.coursedesign.R;
-import com.example.administrator.coursedesign.Tool.AbstractGraph;
-import com.example.administrator.coursedesign.Tool.SixteenTailModel;
-import com.example.administrator.coursedesign.Tool.UnweightedGraph;
+import com.example.administrator.coursedesign.Entity.SixteenTailModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author dailiwen
+ */
 public class SixteenTailModelActivity extends AppCompatActivity {
     @BindView(R.id.parent)
     LinearLayout parent;
@@ -80,11 +76,6 @@ public class SixteenTailModelActivity extends AppCompatActivity {
      * 对角线规则解决
      */
     private SixteenTailModel DIAGmodel = new SixteenTailModel(true);
-    /**
-     * 计数用
-     */
-    private int count = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -447,7 +438,7 @@ public class SixteenTailModelActivity extends AppCompatActivity {
     }
 
     /**
-     * 动态添加布局
+     * 动态添加布局,显示执行的过程
      */
     private View addView(char[] ch1, char[] ch) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

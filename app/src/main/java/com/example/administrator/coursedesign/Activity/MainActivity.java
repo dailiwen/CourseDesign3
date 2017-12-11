@@ -11,6 +11,9 @@ import com.example.administrator.coursedesign.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author dailiwen
+ */
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.point)
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     Button manualpointgame;
     @BindView(R.id.sixteen)
     Button sixteen;
+    @BindView(R.id.maze)
+    Button maze;
 
 
     @Override
@@ -47,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, SixteenTailModelActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        maze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, MazeActivity.class);
                 startActivity(intent);
             }
         });
