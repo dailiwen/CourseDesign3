@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.administrator.coursedesign.Adapter.MazeAdapter;
 import com.example.administrator.coursedesign.Entity.CustomPopWindow;
 import com.example.administrator.coursedesign.Entity.Maze;
 import com.example.administrator.coursedesign.R;
@@ -24,7 +25,7 @@ import org.litepal.crud.DataSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MazeActivity extends AppCompatActivity implements MyAdapter.LCallBack{
+public class MazeActivity extends AppCompatActivity implements MazeAdapter.LCallBack{
     private Button[][] Btn = new Button[8][8];
     private Button get;
 
@@ -33,7 +34,7 @@ public class MazeActivity extends AppCompatActivity implements MyAdapter.LCallBa
     private int[][] wall = new int[8][8];
 
     private CustomPopWindow mListPopWindow;
-    private MyAdapter myAdapter;
+    private MazeAdapter myAdapter;
     private Context mContext;
 
 
@@ -304,7 +305,7 @@ public class MazeActivity extends AppCompatActivity implements MyAdapter.LCallBa
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
-        MyAdapter adapter = new MyAdapter(mContext,MazeActivity.this);
+        MazeAdapter adapter = new MazeAdapter(mContext,MazeActivity.this);
         adapter.setData(mockData());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -330,12 +331,12 @@ public class MazeActivity extends AppCompatActivity implements MyAdapter.LCallBa
     /**
      * 展示PopListView
      */
-    private void showPopListView(){
+    private void showPopListView() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.pop_list,null);
         //处理popWindow 显示内容
         handleListView(contentView);
         //创建并显示popWindow
-        mListPopWindow= new CustomPopWindow.PopupWindowBuilder(this)
+        mListPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(contentView)
                 //显示大小
                 .size(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)

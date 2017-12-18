@@ -31,5 +31,11 @@
         android:layout_height="wrap_content"
         android:text="迷宫游戏"/>
 
+    <Button
+        android:id="@+id/huffman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数据压缩"/>
+
 
 </LinearLayout>

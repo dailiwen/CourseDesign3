@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Button sixteen;
     @BindView(R.id.maze)
     Button maze;
+    @BindView(R.id.huffman)
+    Button huffman;
 
 
     @Override
@@ -60,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, MazeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        huffman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, HaffmanActivity.class);
                 startActivity(intent);
             }
         });

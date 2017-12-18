@@ -8,5 +8,7 @@
     <color name="blue">#007FFF</color>
     <color name="textView">#757575</color>
     <color name="button">#d6d7d7</color>
+    <color name="white">#FFFFFF</color>
     <color name="mazeBackground">#00fefc</color>
+    <color name="pink">#f2a9a2</color>
 </resources>

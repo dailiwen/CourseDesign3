@@ -1,4 +1,4 @@
-package com.example.administrator.coursedesign.Activity;
+package com.example.administrator.coursedesign.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -17,13 +17,13 @@ import java.util.List;
  * @date 2017/12/11 下午 2:47
  */
 
-public class MyAdapter extends RecyclerView.Adapter {
+public class MazeAdapter extends RecyclerView.Adapter {
 
     private List<String> mData;
     private LCallBack lCallBack;
     private Context mContext;
 
-    public MyAdapter(Context context,LCallBack lCallBack) {
+    public MazeAdapter(Context context, LCallBack lCallBack) {
         this.lCallBack = lCallBack;
         mContext = context;
     }

@@ -57,7 +57,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:orientation="vertical">
         <LinearLayout
@@ -150,11 +150,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-            <TextView
+            <Button
                 android:id="@+id/version3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="版本3运算结果为:0.8044362360328747"/>
+                android:text="计算版本3:"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/allcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
