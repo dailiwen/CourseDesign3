@@ -1,5 +1,6 @@
 package com.example.administrator.coursedesign.Entity;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;

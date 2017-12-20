@@ -1,5 +1,14 @@
 package com.example.administrator.coursedesign.Activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,6 +23,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.administrator.coursedesign.Entity.CustomPopWindow;
 import com.example.administrator.coursedesign.Entity.DrawLine;
@@ -22,6 +32,12 @@ import com.example.administrator.coursedesign.Entity.HuffmanTree;
 import com.example.administrator.coursedesign.R;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +70,11 @@ public class HaffmanActivity extends AppCompatActivity {
 
     private int directionJud = 1;
 
+    /**
+     * 文件路径
+     */
+    private String commonFilePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +94,7 @@ public class HaffmanActivity extends AppCompatActivity {
         btnView.setLayoutParams(lp);
         layout.addView(btnView);
         btn1 = btnView.findViewById(R.id.Btn1);
-        btn2 = btnView.findViewById(R.id.Btn1);
+        btn2 = btnView.findViewById(R.id.Btn2);
 
         contentView = LayoutInflater.from(HaffmanActivity.this).inflate(R.layout.haffman_input,null);
         popwinInput = contentView.findViewById(R.id.popinput);
@@ -95,6 +116,17 @@ public class HaffmanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showPopListView();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                //设置类型，我这里是任意类型，任意后缀的可以这样写。
+                intent.setType("*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -121,6 +153,13 @@ public class HaffmanActivity extends AppCompatActivity {
                 mPopwindow.onDismiss();
             }
         });
+    }
+
+    /**
+     * 显示Toast信息
+     */
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -166,12 +205,18 @@ public class HaffmanActivity extends AppCompatActivity {
         return count;
     }
 
+    /**
+     * 绘画哈夫曼树的起始
+     */
     public void drawTree(List<HuffmanTree.Node> list) {
         layout.removeAllViews();
         displayTree(list.get(0), width / 2, 180, 400, directionJud);
         layout.addView(btnView);
     }
 
+    /**
+     * 利用递归，逐渐调整X,Y的坐标，实现绘制哈夫曼树的算法
+     */
     private void displayTree(HuffmanTree.Node root,int x, int y, int xGap, int directionJud) {
         if ("null".equals(root.getData() + "")) {
             view = new DrawView(this, root.getWeight(), x, y, xGap, directionJud);
@@ -183,13 +228,7 @@ public class HaffmanActivity extends AppCompatActivity {
             //通知view组件重绘
             view.invalidate();
             layout.addView(view);
-
         }
-
-        if (root.getLeftChild() == null) {
-            directionJud = 0;
-        }
-
 
         if (root.getLeftChild() != null) {
             directionJud = 1;
@@ -205,6 +244,79 @@ public class HaffmanActivity extends AppCompatActivity {
             viewLine = new DrawLine(this, x, y, xGap, directionJud);
             view.invalidate();
             layout.addView(viewLine);
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //是否选择，没选择就不会继续
+        if (resultCode == Activity.RESULT_OK) {
+            Uri uri = data.getData();
+            String scheme = uri.getScheme();
+            //从系统文件管理器中查找文件
+            if (requestCode == 1) {
+                //得到文件的真实路径
+                if (scheme == null) {
+                    commonFilePath = uri.getPath();
+                } else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+                    Cursor cursor = this.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+                    if (null != cursor) {
+                        if (cursor.moveToFirst()) {
+                            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                            if (index > -1) {
+                                commonFilePath = cursor.getString(index);
+                            }
+                        }
+                        cursor.close();
+                    }
+                }
+                //读取文件
+                readFile(commonFilePath);
+            }
+        }
+    }
+
+    /**
+     * 根据指定路径，读取文件
+     * @param path
+     */
+    public void readFile(String path){
+        File file = new File(path);
+        StringBuilder content = new StringBuilder();
+        try{
+            FileInputStream is = new FileInputStream(file);
+            if(null != is){
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+
+                //临时变量，用于暂时存储读取出来的一行数据
+                String line = "";
+                //逐行读取
+                while (true){
+                    line = br.readLine();
+                    if(line == null){
+                        break;
+                    }
+                    content.append(line);
+                }
+                List<HuffmanTree.Node> nodes = new ArrayList<HuffmanTree.Node>();
+                Map<String,Integer> map = letterCount(content.toString());
+                Set<String> keys = map.keySet();
+                for(String key : keys){
+                    nodes.add(new HuffmanTree.Node(key,map.get(key)));
+                }
+                HuffmanTree.Node root = HuffmanTree.createTree(nodes);
+                HuffmanTree.breadthFirst(root);
+                isr.close();
+                br.close();
+                is.close();
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(this, "文件不存在", Toast.LENGTH_SHORT).show();
+        }catch (IOException e){
+            Toast.makeText(this, "读取错误", Toast.LENGTH_SHORT).show();
         }
     }
 

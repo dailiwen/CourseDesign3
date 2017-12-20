@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Button maze;
     @BindView(R.id.huffman)
     Button huffman;
+    @BindView(R.id.cross)
+    Button cross;
 
 
     @Override
@@ -70,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, HaffmanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, CrossRiverActivity.class);
                 startActivity(intent);
             }
         });
