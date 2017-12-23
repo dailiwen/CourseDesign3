@@ -68,8 +68,7 @@ public class CrossRiver {
 			//这种情况应被设为不可达
 			return -1;
 		}else{
-			System.arraycopy(
-					tempNode, 0,node, 0, tempNode.length);
+			System.arraycopy(tempNode, 0,node, 0, tempNode.length);
 			return getIndex(node);
 		}
 	}
@@ -84,7 +83,6 @@ public class CrossRiver {
 		else {
 			node[posistion] = '0';
 		}
-
 	}
 
 	/**

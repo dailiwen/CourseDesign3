@@ -3,15 +3,126 @@ package com.example.administrator.coursedesign.Entity;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+
 
 /**
  * @author dailiwen
  * @date 2017/12/13 0013 下午 2:30
  */
 
-public class HuffmanTree {
+public class HuffmanTree<E> implements Serializable {
+    private LinkedList<Node1<E>> list = new LinkedList<Node1<E>>();
+    private Node1<E>[] nodes;
+    private Node1<E> head;
+    private int size;
+
+    public HuffmanTree(Node1<E>[] nodes){
+        this.nodes = nodes;
+        for(int i = 0; i < nodes.length;i++){
+            if(nodes[i].weight != 0){
+                list.add(nodes[i]);
+                size++;
+            }
+        }
+        toTree();
+    }
+
+
+    public void toTree(){
+        Node1<E> minNode1;
+        Node1<E> minNode2;
+        while( list.size() > 1){
+            minNode1 = list.get(0);
+            for(int i = 0;i <list.size();i++){
+                int weight = list.get(i).weight;
+                if(minNode1.weight >= weight){
+                    minNode1 =  list.get(i);
+                }
+            }
+            list.remove(minNode1);
+
+            minNode2 = list.get(0);
+            for(int i = 0;i < list.size();i++){
+                int weight = list.get(i).weight;
+                if(minNode2.weight >= weight){
+                    minNode2 = list.get(i);
+                }
+            }
+            list.remove(minNode2);
+            list.add(buildTree(minNode1,minNode2));
+        }
+        head = list.get(0);
+    }
+
+
+    public Node1<E> getHead(){
+        return this.head;
+    }
+
+    public Map<E, String> getEncodeMap(){
+        Map<E, String>  encodeMap = new HashMap<E,String>();
+        for(int i = 0;i < nodes.length;i++){
+            encodeMap.put(nodes[i].data, count(nodes[i]));
+        }
+        return encodeMap;
+    }
+
+    @Override
+    public String toString(){
+        String s = "";
+        for(int i = 0;i < nodes.length;i++){
+            s += nodes[i].data + " : " + count(nodes[i]) + "\n";
+        }
+
+        return s;
+    }
+
+    public String count(Node1<E> currentNode){
+        Node1<E> currentChild = currentNode;
+        Node1<E> currentParent = currentChild.parent;
+        String s ="";
+        while(currentParent != null){
+            if(currentParent.Lchild.equals(currentChild)){
+                s = "1" + s;
+            }else{
+                s = "0" + s;
+            }
+            currentChild = currentParent;
+            currentParent = currentParent.parent;
+        }
+        return s;
+    }
+
+    public Node1<E> buildTree(Node1<E> LTree,Node1<E> RTree){
+        Node1<E> node = new Node1<E>();
+        node.weight = LTree.weight + RTree.weight;
+        node.Lchild = LTree;
+        node.Rchild = RTree;
+        LTree.parent = node;
+        RTree.parent = node;
+        return node;
+    }
+
+    public static class Node1<E> implements Serializable{
+        E data;
+        public int weight;
+        Node1<E> parent;
+        Node1<E> Rchild;
+        Node1<E> Lchild;
+
+        public Node1(){
+
+        }
+        public Node1(E e) {
+            data = e;
+        }
+    }
+
     public static class Node<E> {
         E data;
         int weight;
@@ -152,22 +263,6 @@ public class HuffmanTree {
                 queue.offer(p.rightChild);
             }
         }
-        return list;
-    }
-
-    /**
-     * 广度优先遍历
-     */
-    public static List<Node> test(List<Node> list, Node result){
-
-        if (list.get(0).getLeftChild() != null) {
-            list.add(list.get(0).getLeftChild());
-        }
-
-        if (list.get(0).getLeftChild() != null) {
-            list.add(list.get(0).getRightChild());
-        }
-
         return list;
     }
 }
