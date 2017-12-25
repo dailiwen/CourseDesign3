@@ -1,35 +1,30 @@
 package com.example.administrator.coursedesign.Tool;
+
+import com.example.administrator.coursedesign.Tool.AbstractGraph;
+
 import java.util.List;
 
 public class UnweightedGraph<V> extends AbstractGraph<V> {
-  /** Construct a graph from edges and vertices stored in arrays */
-  public UnweightedGraph(int[][] edges, V[] vertices) {
-    super(edges, vertices);
-  }
 
-  /** Construct a graph from edges and vertices stored in List */
-  public UnweightedGraph(List<Edge> edges, List<V> vertices) {
-    super(edges, vertices);
-  }
+	/**通过一个edges和包含一个顶点的数组构建个图**/
+	public UnweightedGraph(int[][] edges, V[] vertices) {
+		super(edges, vertices);
+	}
 
-  /** Construct a graph for integer vertices 0, 1, 2 and edge list */
-  public UnweightedGraph(List<Edge> edges, int numberOfVertices) {
-    super(edges, numberOfVertices);
-  }
-  
-  /** Construct a graph from integer vertices 0, 1, and edge array */
-  public UnweightedGraph(int[][] edges, int numberOfVertices) {
-    super(edges, numberOfVertices);
-  }
+	public UnweightedGraph(List<Edge> edges, List<V> vertices){
+		super(edges, vertices);
+	}
 
+	public UnweightedGraph(List<Edge> edges, int numberOfVertices) {
+		super(edges, numberOfVertices);
+	}
 
-public int[][] getAdjacencyMatrix() {
-	// TODO Auto-generated method stub
-	return null;
-}
+	public UnweightedGraph(int[][] edges, int numberOfVertices){
+		super(edges, numberOfVertices);
+	}
 
-public void printAdjacencyMatrix() {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public List<List<Edge>> getNeighbors() {
+		return null;
+	}
 }

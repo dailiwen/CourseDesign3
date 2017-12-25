@@ -358,7 +358,7 @@ public class HaffmanActivity extends AppCompatActivity {
                 }
                 huffmanTree = new HuffmanTree<Character>(nodes);
                 String fileName = file.getName();
-                saveFile(huffmanTree, file.getName());
+//                saveFile(huffmanTree, file.getName());
 //                Log.d("dailiwen", huffmanTree.toString());
                 br.close();
                 is.close();
@@ -388,65 +388,65 @@ public class HaffmanActivity extends AppCompatActivity {
         return weightingMap;
     }
 
-    public static void saveFile(HuffmanTree<Character> bfile, String fileName) {
-        String filePath = "/storage/emulated/0/courseDesign";
+//    public static void saveFile(HuffmanTree<Character> bfile, String fileName) {
+//        String filePath = "/storage/emulated/0/courseDesign";
+//
+//        File file = null;
+//        try {
+//            //通过创建对应路径的下是否有相应的文件夹。
+//            File dir = new File(filePath);
+//            if (!dir.exists()) {// 判断文件目录是否存在
+//                //如果文件存在则删除已存在的文件夹。
+//                dir.mkdirs();
+//            }
+//
+//            //如果文件存在则删除文件
+//            file = new File(filePath, fileName);
+//            if(file.exists()){
+//                file.delete();
+//            }
+//            File tempFile = new File("/storage/emulated/0/courseDesign" + fileName);
+//            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile)));
+//            dataOutputStream.writeObject(bfile);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                saveHuffmanTree.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-        File file = null;
-        try {
-            //通过创建对应路径的下是否有相应的文件夹。
-            File dir = new File(filePath);
-            if (!dir.exists()) {// 判断文件目录是否存在
-                //如果文件存在则删除已存在的文件夹。
-                dir.mkdirs();
-            }
-
-            //如果文件存在则删除文件
-            file = new File(filePath, fileName);
-            if(file.exists()){
-                file.delete();
-            }
-            File tempFile = new File("/storage/emulated/0/courseDesign" + fileName);
-            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile)));
-            dataOutputStream.writeObject(bfile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                saveHuffmanTree.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 利用产生的哈夫曼树压缩文件
-     * @param path
-     * @param fileName
-     */
-    public void saveCompressedFile(String path, String fileName, String text){
-        //判断手机是否存在SD卡
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            //获取SD卡的当前的工作
-            sdCardPath  = Environment.getExternalStorageDirectory().getAbsolutePath();
-        }
-        File tempFile = new File(sdCardPath + "/" +path + "/" + fileName);
-        try {
-            //创建二进制文件流
-            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile)));
-            //根据传进来的
-            int[] allCode = analysisByte(text);
-            for(int i = 0; i < allCode.length; i++){
-                //以二进制的方式将编码存入文件
-                dataOutputStream.write(allCode[i]);
-            }
-            dataOutputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * 利用产生的哈夫曼树压缩文件
+//     * @param path
+//     * @param fileName
+//     */
+//    public void saveCompressedFile(String path, String fileName, String text){
+//        //判断手机是否存在SD卡
+//        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+//            //获取SD卡的当前的工作
+//            sdCardPath  = Environment.getExternalStorageDirectory().getAbsolutePath();
+//        }
+//        File tempFile = new File(sdCardPath + "/" +path + "/" + fileName);
+//        try {
+//            //创建二进制文件流
+//            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile)));
+//            //根据传进来的
+//            int[] allCode = analysisByte(text);
+//            for(int i = 0; i < allCode.length; i++){
+//                //以二进制的方式将编码存入文件
+//                dataOutputStream.write(allCode[i]);
+//            }
+//            dataOutputStream.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * 将每八个字符（二进制编码）装换为十进制

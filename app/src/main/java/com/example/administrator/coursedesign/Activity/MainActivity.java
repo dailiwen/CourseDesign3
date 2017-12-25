@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button huffman;
     @BindView(R.id.cross)
     Button cross;
+    @BindView(R.id.jdc)
+    Button jdc;
 
 
     @Override
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         pointgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, TwentyfourActivity.class);
+                Intent intent = new Intent(MainActivity.this, TwentyfourActivity.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         manualpointgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, ManualTwentyfoutActivity.class);
+                Intent intent = new Intent(MainActivity.this, ManualTwentyfoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         sixteen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, SixteenTailModelActivity.class);
+                Intent intent = new Intent(MainActivity.this, SixteenTailModelActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         maze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, MazeActivity.class);
+                Intent intent = new Intent(MainActivity.this, MazeActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         huffman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, HaffmanActivity.class);
+                Intent intent = new Intent(MainActivity.this, HaffmanActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,10 +81,17 @@ public class MainActivity extends AppCompatActivity {
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this, CrossRiverActivity.class);
+                Intent intent = new Intent(MainActivity.this, CrossRiverActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        jdc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, JDCShowActivity.class);
                 startActivity(intent);
             }
         });
     }
-
 }

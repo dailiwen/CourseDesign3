@@ -43,5 +43,11 @@
         android:layout_height="wrap_content"
         android:text="农夫过河"/>
 
+    <Button
+        android:id="@+id/jdc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="线性表等展示"/>
+
 
 </LinearLayout>

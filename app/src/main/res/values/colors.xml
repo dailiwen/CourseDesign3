@@ -12,4 +12,10 @@
     <color name="mazeBackground">#00fefc</color>
     <color name="pink">#f2a9a2</color>
     <color name="brown">#F4A460</color>
+    <color name="list_item">#bffef9</color>
+
+    <color name="font1">#333333</color>
+    <color name="font2">#666666</color>
+    <color name="font3">#999999</color>
+    <color name="font4">#cccccc</color>
 </resources>

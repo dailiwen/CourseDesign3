@@ -1,375 +1,333 @@
 package com.example.administrator.coursedesign.Tool;
 
+import android.util.Log;
+
+import com.example.administrator.coursedesign.Tool.Graph;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import java.util.*;
-
 public abstract class AbstractGraph<V> implements Graph<V> {
-	protected List<V> vertices = new ArrayList<V>(); // Store vertices
-	protected List<List<Integer>> neighbors = new ArrayList<List<Integer>>(); // Adjacency
-																				// lists
+	protected List<V> vertices;//用于存储结点
+	protected List<List<Integer>> neighbors;//邻接表
 
-	/** Construct an empty graph */
-	protected AbstractGraph() {
-	}
-
-	/** Construct a graph from edges and vertices stored in arrays */
-	protected AbstractGraph(int[][] edges, V[] vertices) {
-		for (int i = 0; i < vertices.length; i++)
+	/**从数组中存储的边和顶点构造一个图**/
+	public AbstractGraph(int[][] edges, V[] vertices){
+		this.vertices = new ArrayList<V>();
+		for(int i = 0; i < vertices.length; i++){
 			this.vertices.add(vertices[i]);
-
+		}
 		createAdjacencyLists(edges, vertices.length);
 	}
 
-	/** Construct a graph from edges and vertices stored in List */
-	protected AbstractGraph(List<Edge> edges, List<V> vertices) {
-		for (int i = 0; i < vertices.size(); i++)
-			this.vertices.add(vertices.get(i));
+	protected AbstractGraph(List<Edge> edges, List<V> vertices){
+		this.vertices = vertices;
 
 		createAdjacencyLists(edges, vertices.size());
 	}
 
-	/** Construct a graph for integer vertices 0, 1, 2 and edge list */
-	protected AbstractGraph(List<Edge> edges, int numberOfVertices) {
-		for (int i = 0; i < numberOfVertices; i++) {
-			vertices.add((V) (new Integer(i))); // vertices is {0, 1, ...}
+	@SuppressWarnings("unchecked")
+	protected AbstractGraph(List<Edge> edges, int numberOfVertices){
+		vertices = new ArrayList<V>();
+		for(int i = 0; i < numberOfVertices; i++){
+			vertices.add((V)(new Integer(i)));//顶点是{0,1,2,3...}
 		}
+
 		createAdjacencyLists(edges, numberOfVertices);
 	}
 
-	/** Construct a graph from integer vertices 0, 1, and edge array */
-	protected AbstractGraph(int[][] edges, int numberOfVertices) {
-		for (int i = 0; i < numberOfVertices; i++) {
-			vertices.add((V) (new Integer(i))); // vertices is {0, 1, ...}
+	@SuppressWarnings("unchecked")
+	protected AbstractGraph(int[][] edges, int numberOfVertices){
+		vertices = new ArrayList<V>();//创建顶点
+		for(int i = 0; i < numberOfVertices; i++){
+			vertices.add((V)(new Integer(i)));//顶点是{1,2,3...}
 		}
+
 		createAdjacencyLists(edges, numberOfVertices);
 	}
 
-	/** Create adjacency lists for each vertex */
-	private void createAdjacencyLists(int[][] edges, int numberOfVertices) {
-		// Create a linked list
-		for (int i = 0; i < numberOfVertices; i++) {
+	/**
+	 * 为每个顶点创建一个邻接线性表
+	 * @param edges
+	 * @param numberOfVertices
+	 */
+	private void createAdjacencyLists(int[][] edges, int numberOfVertices){
+		//创建一个链表
+		neighbors = new ArrayList<List<Integer>>();
+		for(int i = 0; i < numberOfVertices; i++){
 			neighbors.add(new ArrayList<Integer>());
 		}
 
-		for (int i = 0; i < edges.length; i++) {
+		for(int i = 0; i < edges.length; i++){
 			int u = edges[i][0];
 			int v = edges[i][1];
 			neighbors.get(u).add(v);
 		}
 	}
 
-	/** Create adjacency lists for each vertex */
-	private void createAdjacencyLists(List<Edge> edges, int numberOfVertices) {
-		// Create a linked list for each vertex
-		for (int i = 0; i < numberOfVertices; i++) {
+	/**
+	 * 程序完善第二题
+	 * 为每个顶点创建一个邻接线性表
+	 * @param edges
+	 * @param numberOfVertices
+	 */
+	private void createAdjacencyLists(List<Edge> edges, int numberOfVertices){
+		//创建一个线性表
+		neighbors = new ArrayList<List<Integer>>();
+		for(int i = 0; i < numberOfVertices; i++){
 			neighbors.add(new ArrayList<Integer>());
 		}
 
-		for (Edge edge : edges) {
+		for(Edge edge : edges){
 			neighbors.get(edge.u).add(edge.v);
 		}
 	}
 
-	/** Return the number of vertices in the graph */
-	public int getSize() {
+	/**返回该图中顶点的个数**/
+	@Override
+	public int getSize(){
 		return vertices.size();
 	}
 
-	/** Return the vertices in the graph */
-	public List<V> getVertices() {
+	/**返回图中所有顶点**/
+	@Override
+	public List<V> getVertices(){
 		return vertices;
 	}
 
-	/** Return the object for the specified vertex */
-	public V getVertex(int index) {
+	/**返回特定角标处的顶点**/
+	@Override
+	public V getVertex(int index){
 		return vertices.get(index);
 	}
 
-	/** Return the index for the specified vertex object */
-	public int getIndex(V v) {
+	/**返回指定角标的角标**/
+	@Override
+	public int getIndex(V v){
 		return vertices.indexOf(v);
 	}
 
-	/** Return the neighbors of vertex with the specified index */
-	public List<Integer> getNeighbors(int index) {
+	/**返回特定角标处顶点的相邻顶点**/
+	@Override
+	public List<Integer> getNeighbors(int index){
 		return neighbors.get(index);
 	}
 
-	/** Return the degree for a specified vertex */
-	public int getDegree(int v) {
+	/**返回指定顶点的度数**/
+	@Override
+	public int getDegree(int v){
 		return neighbors.get(v).size();
 	}
 
-	/** Print the edges */
-	public void printEdges() {
-		for (int u = 0; u < neighbors.size(); u++) {
-			System.out.print(getVertex(u) + " (" + u + "): ");
-			for (int j = 0; j < neighbors.get(u).size(); j++) {
-				System.out.print("(" + u + ", " + neighbors.get(u).get(j)
-						+ ") ");
+	/**返回一个邻接矩阵**/
+	@Override
+	public int[][] getAdjacencyMatrix(){
+		int[][] adjacencyMatrix = new int[getSize()][getSize()];
+
+		for(int i = 0; i < neighbors.size(); i++){
+			for(int j = 0; j < neighbors.get(i).size(); j++){
+				int v = neighbors.get(i).get(j);
+				adjacencyMatrix[i][v] = 1;
+			}
+		}
+
+		return adjacencyMatrix;
+	}
+
+	/**打印邻接矩阵**/
+	@Override
+	public void printAdjacencyMatrix(){
+		int[][] adjacencyMatrix = getAdjacencyMatrix();
+		for(int i = 0; i < adjacencyMatrix.length; i++){
+			for(int j = 0; j < adjacencyMatrix[0].length; j++){
+				System.out.print(adjacencyMatrix[i][j] + " ");
+			}
+
+			System.out.println();
+		}
+	}
+
+	/**打印edges(相当于邻接线性表)**/
+	@Override
+	public void printEdges(){
+		for(int u = 0; u < neighbors.size(); u++){
+			System.out.print("Vertex " + u + ": ");
+			for(int j = 0; j < neighbors.get(u).size(); j++){
+				System.out.print("(" + u + ", " + neighbors.get(u).get(j) + ") ");
 			}
 			System.out.println();
 		}
 	}
 
-	/** Clear graph */
-	public void clear() {
-		vertices.clear();
-		neighbors.clear();
+	/**
+	 * 得到一个邻接线性表
+	 * @return
+	 */
+	@Override
+	public List<List<Integer>> getList(){
+		return neighbors;
 	}
 
-	/** Add a vertex to the graph */
-	public void addVertex(V vertex) {
-		vertices.add(vertex);
-		neighbors.add(new ArrayList<Integer>());
-	}
+	/**
+	 * 程序完善第一题
+	 * 内部类Edge
+	 * @author dailiwen
+	 */
+	public static class Edge{
+		public int u;//起始顶点
+		public int v;//结束顶点
 
-	/** Add an edge to the graph */
-	public void addEdge(int u, int v) {
-		neighbors.get(u).add(v);
-		neighbors.get(v).add(u);
-	}
-
-	/** Edge inner class inside the AbstractGraph class */
-	public static class Edge {
-		public int u; // Starting vertex of the edge
-		public int v; // Ending vertex of the edge
-
-		/** Construct an edge for (u, v) */
-		public Edge(int u, int v) {
+		/**创建默认起始顶点和终止顶点的构造器**/
+		public Edge(int u, int v){
 			this.u = u;
 			this.v = v;
 		}
 	}
 
-	/** Obtain a DFS tree starting from vertex v */
-	/** To be discussed in Section 27.6 */
-	public Tree dfs(int v) {
+	/**获得从顶点v开始的DFS树，并在27.6进行讨论**/
+	@Override
+	public Tree dfs(int v){
 		List<Integer> searchOrders = new ArrayList<Integer>();
 		int[] parent = new int[vertices.size()];
-		for (int i = 0; i < parent.length; i++)
-			parent[i] = -1; // Initialize parent[i] to -1
-
-		// Mark visited vertices
+		for(int i = 0; i < parent.length; i++){
+			//初始化parent[i]为-1
+			parent[i] = -1;
+		}
+		//标记访问顶点
 		boolean[] isVisited = new boolean[vertices.size()];
 
-		// Recursively search
+		//递归查找
 		dfs(v, parent, searchOrders, isVisited);
 
-		// Return a search tree
+		//返回一个查找树
 		return new Tree(v, parent, searchOrders);
 	}
 
-	/** Recursive method for DFS search */
-	private void dfs(int v, int[] parent, List<Integer> searchOrders,
-			boolean[] isVisited) {
-		// Store the visited vertex
+	/**DFS搜索的递归方法**/
+	private void dfs(int v, int[] parent, List<Integer> searchOrders, boolean[] isVisited){
+		//存储已经被访问的顶点
 		searchOrders.add(v);
-		isVisited[v] = true; // Vertex v visited
+		//顶点v已经被访问
+		isVisited[v] = true;
 
-		for (int i : neighbors.get(v)) {
-			if (!isVisited[i]) {
-				parent[i] = v; // The parent of vertex i is v
-				dfs(i, parent, searchOrders, isVisited); // Recursive search
+		for(int i : neighbors.get(v)){
+			if(!isVisited[i]){
+				//顶点i的父元素是v
+				parent[i] = v;
+				//递归查找
+				dfs(i, parent, searchOrders, isVisited);
 			}
 		}
 	}
 
-	/** Starting bfs search from vertex v */
-	/** To be discussed in Section 27.7 */
-	public Tree bfs(int v) {
+	/**获得从顶点v开始的bfs树**/
+	@Override
+	public Tree bfs(int v){
 		List<Integer> searchOrders = new ArrayList<Integer>();
 		int[] parent = new int[vertices.size()];
-		for (int i = 0; i < parent.length; i++)
-			parent[i] = -1; // Initialize parent[i] to -1
 
-		LinkedList<Integer> queue = new LinkedList<Integer>(); // list
-																					// used																	// as
-																					// a
-																					// queue
+		for(int i = 0; i < parent.length; i++){
+			//初始化为-1
+			parent[i] = -1;
+		}
+
+		//申明一个队列
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+		//初始化访问标志
 		boolean[] isVisited = new boolean[vertices.size()];
-		queue.offer(v); // Enqueue v
-		isVisited[v] = true; // Mark it visited
-
-		while (!queue.isEmpty()) {
-			int u = queue.poll(); // Dequeue to u
-			searchOrders.add(u); // u searched
-			for (int w : neighbors.get(u)) {
-				if (!isVisited[w]) {
-					queue.offer(w); // Enqueue w
-					parent[w] = u; // The parent of w is u
-					isVisited[w] = true; // Mark it visited
+		//将V添加到队列尾部
+		queue.offer(v);
+		//标记已被访问
+		isVisited[v] = true;
+		int count = 0;
+		while(!queue.isEmpty()){
+			//删除队列的第一个元素
+			int u = queue.poll();
+			//将u添加到查找记录表中
+			searchOrders.add(u);
+			//依次遍历第一个元素的邻居
+			for(int w : neighbors.get(u)){
+				//如果它的邻居没有被访问
+				if(!isVisited[w]){
+					//那么就将其添加到队列中
+					queue.offer(w);
+					parent[w] = u;
+					isVisited[w] = true;
+					count++;
 				}
 			}
 		}
-
+		Log.d("count",count + "");
 		return new Tree(v, parent, searchOrders);
 	}
 
-	/** Tree inner class inside the AbstractGraph class */
-	/** To be discussed in Section 27.5 */
-	public class Tree {
-		private int root; // The root of the tree
-		private int[] parent; // Store the parent of each vertex
-		private List<Integer> searchOrders; // Store the search order
+	/**内部类tree**/
+	public class Tree{
+		private int root;
+		private int[] parent;
+		private List<Integer> searchOrders;
 
-		/** Construct a tree with root, parent, and searchOrder */
-		public Tree(int root, int[] parent, List<Integer> searchOrders) {
+		public Tree(int root, int[] parent, List<Integer> searchOrders){
 			this.root = root;
 			this.parent = parent;
 			this.searchOrders = searchOrders;
 		}
-		
-		/** Return the root of the tree */
-		public int getRoot() {
+
+		public Tree(int root, int[] parent){
+			this.root = root;
+			this.parent = parent;
+		}
+
+		/**返回该树的根**/
+		public int getRoot(){
 			return root;
 		}
 
-		/** Return the parent of vertex v */
-		public int getParent(int v) {
-			return parent[v];
-		}
-
-		/** Return an array representing search order */
-		public List<Integer> getSearchOrders() {
+		/**返回顶点V的父节点**/
+		public List<Integer> getSearchOrders(){
 			return searchOrders;
 		}
 
-		/** Return number of vertices found */
-		public int getNumberOfVerticesFound() {
+		/**返回查找到的顶点数**/
+		public int getNumberOfVerticesFound(){
 			return searchOrders.size();
 		}
 
-		/** Return the path of vertices from a vertex index to the root */
-		public List<V> getPath(int index) {
+		/**返回顶点索引到根节点的路径**/
+		public List<V> getPath(int index){
 			ArrayList<V> path = new ArrayList<V>();
 
-			do {
+			do{
 				path.add(vertices.get(index));
 				index = parent[index];
-			} while (index != -1);
+			}
+			while(index != -1);
 
 			return path;
 		}
 
-		/** Print a path from the root to vertex v */
-		public void printPath(int index) {
+
+		/**打印从根节点到顶点v的路径**/
+		public void printPath(int index){
 			List<V> path = getPath(index);
-			System.out.print("A path from " + vertices.get(root) + " to "
-					+ vertices.get(index) + ": ");
-			for (int i = path.size() - 1; i >= 0; i--)
+			System.out.print("A path from " + vertices.get(root) + " to " + vertices.get(index) + ": ");
+			for(int i = path.size() - 1; i >= 0; i--){
 				System.out.print(path.get(i) + " ");
+			}
 		}
 
-		/** Print the whole tree */
-		public void printTree() {
+		/**打印整颗树**/
+		public void printTree(){
 			System.out.println("Root is: " + vertices.get(root));
 			System.out.print("Edges: ");
-			for (int i = 0; i < parent.length; i++) {
-				if (parent[i] != -1) {
-					// Display an edge
-					System.out.print("(" + vertices.get(parent[i]) + ", "
-							+ vertices.get(i) + ") ");
+			for(int i = 0; i < parent.length; i++){
+				if(parent[i] != -1){
+					//显示一个Edge
+					System.out.print("(" + vertices.get(parent[i]) + ", " + vertices.get(i) + ") ");
 				}
 			}
 			System.out.println();
 		}
-	}
-
-	/**
-	 * Return a Hamiltonian path from the specified vertex object Return null if
-	 * the graph does not contain a Hamiltonian path
-	 */
-	public List<Integer> getHamiltonianPath(V vertex) {
-		return getHamiltonianPath(getIndex(vertex));
-	}
-
-	/**
-	 * Return a Hamiltonian path from the specified vertex label Return null if
-	 * the graph does not contain a Hamiltonian path
-	 */
-	public List<Integer> getHamiltonianPath(int v) {
-		// A path starts from v. (i, next[i]) represents an edge in
-		// the path. isVisited[i] tracks whether i is currently in the
-		// path.
-		int[] next = new int[getSize()];
-		for (int i = 0; i < next.length; i++)
-			next[i] = -1; // Indicate no subpath from i is found yet
-
-		boolean[] isVisited = new boolean[getSize()];
-
-		// The vertices in the Hamiltonian path are stored in result
-		List<Integer> result = null;
-
-		// To speed up search, reorder the adjacency list for each
-		// vertex so that the vertices in the list are in increasing
-		// order of their degrees
-		for (int i = 0; i < getSize(); i++)
-			reorderNeigborsBasedOnDegree(neighbors.get(i));
-
-		if (getHamiltonianPath(v, next, isVisited)) {
-			result = new ArrayList<Integer>(); // Create a list for path
-			int vertex = v; // Starting from v
-			while (vertex != -1) {
-				result.add(vertex); // Add vertex to the result list
-				vertex = next[vertex]; // Get the next vertex in the path
-			}
-		}
-
-		return result; // return null if no Hamiltonian path is found
-	}
-
-	/** Reorder the adjacency list in increasing order of degrees */
-	private void reorderNeigborsBasedOnDegree(List<Integer> list) {
-		for (int i = list.size() - 1; i >= 1; i--) {
-			// Find the maximum in the list[0..i]
-			int currentMaxDegree = getDegree(list.get(0));
-			int currentMaxIndex = 0;
-
-			for (int j = 1; j <= i; j++) {
-				if (currentMaxDegree < getDegree(list.get(j))) {
-					currentMaxDegree = getDegree(list.get(j));
-					currentMaxIndex = j;
-				}
-			}
-
-			// Swap list[i] with list[currentMaxIndex] if necessary;
-			if (currentMaxIndex != i) {
-				int temp = list.get(currentMaxIndex);
-				list.set(currentMaxIndex, list.get(i));
-				list.set(i, temp);
-			}
-		}
-	}
-
-	/** Return true if all elements in array isVisited are true */
-	private boolean allVisited(boolean[] isVisited) {
-		boolean result = true;
-
-		for (int i = 0; i < getSize(); i++)
-			result = result && isVisited[i];
-
-		return result;
-	}
-
-	/** Search for a Hamiltonian path from v */
-	private boolean getHamiltonianPath(int v, int[] next, boolean[] isVisited) {
-		isVisited[v] = true; // Mark vertex v visited
-
-		if (allVisited(isVisited))
-			return true; // The path now includes all vertices, thus found
-
-		for (int i = 0; i < neighbors.get(v).size(); i++) {
-			int u = neighbors.get(v).get(i);
-			if (!isVisited[u] && getHamiltonianPath(u, next, isVisited)) {
-				next[v] = u; // Edge (v, u) is in the path
-				return true;
-			}
-		}
-
-		isVisited[v] = false; // Backtrack, v is marked unvisited now
-		return false; // No Hamiltonian path exists from vertex v
 	}
 }

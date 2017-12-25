@@ -36,6 +36,8 @@
             android:screenOrientation="landscape" />
         <activity android:name=".Activity.CrossRiverActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".Activity.JDCShowActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

@@ -1,46 +1,49 @@
 package com.example.administrator.coursedesign.Tool;
 
+/**
+ * Created by dailiwen on 2017/12/7.
+ */
+
 public interface MyList<E> {
-	  /** Add a new element at the end of this list */
-	  public void add(E e);
+    /**将一个新的元素添加入线性表**/
+    public void add(E e);
 
-	  /** Add a new element at the specified index in this list */
-	  public void add(int index, E e);
+    /**将一个元素添加到线性表指定角标的位置**/
+    public void add(int index, E e);
 
-	  /** Clear the list */
-	  public void clear();
+    /**清空线性表**/
+    public void clear();
 
-	  /** Return true if this list contains the element */
-	  public boolean contains(E e);
+    /**如果线性表包含该元素则返回真**/
+    public boolean contains(E e);
 
-	  /** Return the element from this list at the specified index */
-	  public E get(int index);
+    /**返回指定角标处的元素**/
+    public E get(int index);
 
-	  /** Return the index of the first matching element in this list.
-	   *  Return -1 if no match. */
-	  public int indexOf(E e);
+    /**返回线性表中第一个匹配该元素的下标,如果该元素不存在，那么就返回-1**/
+    public int indexOf(E e);
 
-	  /** Return true if this list contains no elements */
-	  public boolean isEmpty();
+    /**如果这个线性表为空，则返回真**/
+    public boolean isEmpty();
 
-	  /** Return the index of the last matching element in this list
-	   *  Return -1 if no match. */
-	  public int lastIndexOf(E e);
+    /**返回线性表中最后一个匹配该元素的下标,如果该元素不存在，那么就返回-1**/
+    public int lastIndexOf(E e);
 
-	  /** Remove the first occurrence of the element o from this list.
-	   *  Shift any subsequent elements to the left.
-	   *  Return true if the element is removed. */
-	  public boolean remove(E e);
+    /**删除指定元素**/
+    public boolean remove(E e);
 
-	  /** Remove the element at the specified position in this list
-	   *  Shift any subsequent elements to the left.
-	   *  Return the element that was removed from the list. */
-	  public E remove(int index);
+    /**删除指定下标处的元素并返回该元素**/
+    public E remove(int index);
 
-	  /** Replace the element at the specified position in this list
-	   *  with the specified element and returns the new set. */
-	  public Object set(int index, E e);
+    /** 替换指定下标处的元素**/
+    public Object set(int index, E e);
 
-	  /** Return the number of elements in this list */
-	  public int size();
-	}
+    /** 返回该线性表的大小**/
+    public int size();
+
+    public boolean addAll(MyList<E> list);
+
+    public boolean removeAll(MyList<E> list);
+
+    public boolean retainAll(MyList<E> list);
+}
