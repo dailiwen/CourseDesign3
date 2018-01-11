@@ -487,7 +487,7 @@ public class TwentyfourActivity extends AppCompatActivity {
         standardexpression[6] = "(" + sE[0] + sE[1] + "(" +sE[2] + sE[3] + sE[4]  + "))" + sE[5] + sE[6];
         for (int i = 0; i < standardexpression.length; i++) {
             System.out.println(standardexpression[i]);
-            if(evaluateExpression(standardexpression[i]) == 24.0){
+            if(evaluateExpression(standardexpression[i]) == 24.0) {
                 expression = standardexpression[i];
                 return true;
             }

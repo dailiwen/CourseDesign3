@@ -66,6 +66,7 @@ public class CrossRiver {
 		//狼羊不能够在一起，羊菜不能够在一起，除非人在场
 		if((sheepWolf && (tempNode[1] != tempNode[0])) || (sheepCabbage && (tempNode[2] != tempNode[0]))){
 			//这种情况应被设为不可达
+
 			return -1;
 		}else{
 			System.arraycopy(tempNode, 0,node, 0, tempNode.length);
